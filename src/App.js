@@ -1,26 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import * as THREE from "three"
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import Container from "./Components/ThreeContainer"
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  state = { 
+    image :'https://l13.alamy.com/360/R1GEFW/spherical-360-degree-equirectangular-panorama-of-funchal-marina-marina-do-funchal-madeira-R1GEFW.jpg',
+    error:  "https://s3.amazonaws.com/duhaime/blog/tsne-webgl/assets/cat.jpg"
+   }
+  render() { 
+    return ( 
+      <div>
+        <Container
+          image={this.state.image}
+          errorImage={this.state.error}
+          
+        /> 
+      </div>
+     );
+  }
 }
-
+ 
 export default App;
+ 
+
+
