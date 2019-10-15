@@ -1,20 +1,19 @@
 import React, { Component } from 'react';
 import * as THREE from "three"
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import axios from "axios"
 
 
 class Container extends Component {
 
 
+state ={
+   image:""
+}
 
- constructor(props){
-    super(props)
-    
-    this.state ={
-        pic: null
-    }
-  
-      let scene = new THREE.Scene()
+  async componentWillMount(){
+   await this._getAssest()
+    let scene = new THREE.Scene()
       let camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000)
       camera.position.z = 1;
       camera.target = new THREE.Vector3(0,0,0)
@@ -23,12 +22,14 @@ class Container extends Component {
       renderer.setPixelRatio( window.devicePixelRatio );
       document.body.appendChild( renderer.domElement );
       let loader = new THREE.TextureLoader()
-      let material;
-
+  
       
         // ------ CONDITIONALLY RENDERING IMAGES///
-        material = new THREE.MeshBasicMaterial({
-        map: loader.load('https://res.cloudinary.com/thejacex/image/upload/v1571101294/thing-gallery/testing.png.png')
+
+        
+    
+        let material = new THREE.MeshBasicMaterial({     
+        map: loader.load(this.state.image)
       }) 
 
 
@@ -60,27 +61,34 @@ class Container extends Component {
       renderer.setSize( window.innerWidth, window.innerHeight );
 
     }
-    
+
+  
       animate()
 
   }
 
-   componentDidMount() {
-     this.setState({
-          pic: this.props.image
-      })
-  }
-  
 
+
+
+
+  _getAssest = async () =>{
+    await axios.get('http://localhost:5000/api/upload')
+    .then(response =>  {
+      let image = response.data[0].imageUrl
+      this.setState({
+        image: image
+      })
+    })
+   }
+ 
+  
   render() {
-     
+    
     return (
-        <div>
-                
+       
+        <div>      
              <div ref={ref => (this.mount) = ref}/>
         </div>
-      
-     
     );
   }
 }
