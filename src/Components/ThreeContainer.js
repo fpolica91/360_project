@@ -5,8 +5,15 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
 class Container extends Component {
 
+
+
  constructor(props){
     super(props)
+    
+    this.state ={
+        pic: null
+    }
+  
       let scene = new THREE.Scene()
       let camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000)
       camera.position.z = 1;
@@ -17,13 +24,12 @@ class Container extends Component {
       document.body.appendChild( renderer.domElement );
       let loader = new THREE.TextureLoader()
       let material;
+
       
         // ------ CONDITIONALLY RENDERING IMAGES///
-        this.props.image? material = new THREE.MeshBasicMaterial({
-        map: loader.load(this.props.image)
-      }) : material = material = new THREE.MeshBasicMaterial({
-        map: loader.load(this.props.errorImage)
-      })
+        material = new THREE.MeshBasicMaterial({
+        map: loader.load('https://res.cloudinary.com/thejacex/image/upload/v1571101294/thing-gallery/testing.png.png')
+      }) 
 
 
 
@@ -54,15 +60,26 @@ class Container extends Component {
       renderer.setSize( window.innerWidth, window.innerHeight );
 
     }
+    
+      animate()
 
-    animate()
+  }
 
+   componentDidMount() {
+     this.setState({
+          pic: this.props.image
+      })
   }
   
 
   render() {
+     
     return (
-       <div ref={ref => (this.mount) = ref}/>
+        <div>
+                
+             <div ref={ref => (this.mount) = ref}/>
+        </div>
+      
      
     );
   }
