@@ -13,7 +13,7 @@ class Container extends Component {
   constructor(props) {
     super(props)
     this.foto = props.foto
-    console.log(this.props.test)
+
 
     let scene = new THREE.Scene()
     let camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000)
@@ -31,7 +31,7 @@ class Container extends Component {
 
 
     let material = new THREE.MeshBasicMaterial({
-      map: loader.load(this.foto)
+      map: loader.load(this.props.test)
       // map: loader.load('https://res.cloudinary.com/thejacex/image/upload/v1571101294/thing-gallery/testing.png.png')
     })
 

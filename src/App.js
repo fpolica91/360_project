@@ -8,31 +8,19 @@ const request = require('sync-request')
 class App extends Component {
 
   picture = 'https://res.cloudinary.com/thejacex/image/upload/v1571101294/thing-gallery/testing.png.png'
+  api = request('GET', 'http://localhost:5000/api/upload').getBody()
 
-  response = request('GET', 'http://localhost:5000/api/upload', {
-    json: { imageUrl: "imageUrl" }
-  })
-
-
-
-
-
-
-
-
-
+  response = JSON.parse(this.api)
 
 
   state = {
     image: this.picture,
-    test: this.response,
+    test: this.response[0].imageUrl,
     error: "https://s3.amazonaws.com/duhaime/blog/tsne-webgl/assets/cat.jpg"
   }
 
 
-  componentDidMount() {
 
-  }
 
 
 
@@ -61,23 +49,18 @@ class App extends Component {
   //     )
   // }
 
-  getUrl = () => {
-    const body = this.state.test
 
-  }
 
 
 
   render() {
-    this.getUrl()
-
 
     return (
 
       <div>
 
         <Container
-          axiosTest={this.state.axiosTest}
+
           test={this.state.test}
           foto={this.state.image}
           errorImage={this.state.error}
