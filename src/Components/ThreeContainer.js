@@ -7,10 +7,14 @@ import axios from "axios"
 
 
 class Container extends Component {
+
+
+
   constructor(props) {
     super(props)
     this.foto = props.foto
     console.log(this.props.test)
+
     let scene = new THREE.Scene()
     let camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000)
     camera.position.z = 1;
@@ -65,14 +69,9 @@ class Container extends Component {
 
   }
 
-  componentDidMount() {
-
-  }
-
-
 
   render() {
-    this.foto = this.props.foto
+
 
     return (
 

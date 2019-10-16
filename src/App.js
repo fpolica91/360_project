@@ -8,19 +8,30 @@ const request = require('sync-request')
 class App extends Component {
 
   picture = 'https://res.cloudinary.com/thejacex/image/upload/v1571101294/thing-gallery/testing.png.png'
-  request = request('GET', 'https://pokeapi.co/api/v2/pokemon/ditto').getBody()
+
+  response = request('GET', 'http://localhost:5000/api/upload', {
+    json: { imageUrl: "imageUrl" }
+  })
+
+
+
+
+
+
+
+
+
 
 
   state = {
-    axiosTest: "",
     image: this.picture,
-    test: this.request,
+    test: this.response,
     error: "https://s3.amazonaws.com/duhaime/blog/tsne-webgl/assets/cat.jpg"
   }
 
 
-  async componentDidMount() {
-    await this.formatter()
+  componentDidMount() {
+
   }
 
 
@@ -36,27 +47,31 @@ class App extends Component {
   //  }
 
   // ('https://pokeapi.co/api/v2/pokemon/ditto')
-  getImageUrl = async () => {
-    try {
-      const url = 'https://pokeapi.co/api/v2/pokemon/ditto'
-      const response = await axios.get(url)
-      return response
-    } catch (err) {
-      console.log(err)
-    }
-  }
+  // getImageUrl = () => {
+  //   const url = 'https://pokeapi.co/api/v2/pokemon/ditto'
+  //   return axios.get(url)
+  // }
 
-  formatter = async () => {
-    await this.getImageUrl()
+  // formatter = () => {
+  //   const clone = [...this.state.axiosTest]
+  //   axios.all([this.getImageUrl()])
+  //     .then(axios.spread(function (pokemon) {
 
+  //     })
+  //     )
+  // }
 
+  getUrl = () => {
+    const body = this.state.test
 
   }
 
 
 
   render() {
-    console.log(this.getImageUrl())
+    this.getUrl()
+
+
     return (
 
       <div>
